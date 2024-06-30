@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block title %} Lista de libros {% endblock %} 
+{% block container %}
+<div class="card">
+  <div class="card-header">
+    <a href="{% url 'create' %}" class="btn btn-success rounded" role="button"
+      >Añadir libro</a
+    >
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">Libros</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Imagen</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for book in books %}
+        <tr>
+          <th scope="row">{{ book.id }}</th>
+          <td>{{ book.title }}</td>
+          <td>
+            <img src="{{ book.image.url }}" class="img-fluid row" style="max-height: 100px; max-width: 200px;">            
+          </td>
+          <td>{{ book.description }}</td>
+          <td>
+            <a href="{% url 'update'  book.id %}" class="btn btn-info rounded  row" role="button"
+              >Editar</a
+            >
+            <a href="{% url 'delete' book.id %}" class="btn btn-danger row rounded" style="margin-top: 10px;" role="button">Borrar</a>
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted"></div>
+</div>
+{% endblock %}
